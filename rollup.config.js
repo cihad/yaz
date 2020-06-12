@@ -12,7 +12,7 @@ export default {
 	},
 	plugins: [
 		serve({
-			contentBase: ['dist', 'demo']
+			contentBase: ['dist']
 		})
 	]
 };
