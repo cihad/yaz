@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Yaz!</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<!-- <script>
+      function sliceText() {
+        
+      }
+    </script>
+
+    <button onclick="sliceText()">
+      test
+    </button> -->
+
+	<button data-wrap-tag="STRONG" class="btn">
+		Bold
+	</button>
+
+	<button data-wrap-tag="EM" class="btn">
+		Italic
+	</button>
+
+	<button data-wrap-tag="U" class="btn">
+		Underline
+	</button>
+
+	<button data-wrap-tag="LINK" class="btn">
+		Link
+	</button>
+
+	<button data-wrap-tag="NOTE" class="btn">
+		.note
+	</button>
+	<!-- 
+		<button data-wrap-tag="UNEM" class="btn">
+		UNEM
+		</button> -->
+
+	<h1>Hi there!</h1>
+	
+<p contenteditable="" id="editable" spellcheck="false">
+	&nbsp;I'm your
+	<strong>
+		cool
+		<em>new</em>
+		webpage.
+	</strong> 
+	Made with 
+	<a href="https://example.com">Example</a>
+	! The
+	<code>some()</code>
+	method tests whether 
+	<span class="note">
+		at least 
+		<em>
+			one element 
+			<u>in the</u>
+			array passes
+		</em> 
+		the
+	</span>
+	test implemented by the provided function. It returns a Boolean value.
+</p>
+
+	<pre id="output" style="tab-size: 4"></pre>
+
+	<script src="./yaz.js"></script>
+	<script src="./index.js"></script>
+</body>
+</html>
