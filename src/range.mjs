@@ -349,7 +349,7 @@ const undo = until => {
 	if (
 		extractedDoc.childNodes.length === 1 
 		&& extractedDoc.firstElementChild
-		&& extractedDoc.firstElementChild.tagName === until
+		&& matchElements(extractedDoc.firstElementChild, until)
 	) {
 		extractedDoc = Array.from(extractedDoc.childNodes[0].childNodes).reduce((acc, node) => {
 			acc.append(node)
