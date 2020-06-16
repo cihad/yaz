@@ -94,6 +94,6 @@ document.querySelectorAll('.btn').forEach(button => {
 				break;
 		}
 
-		editable.focus()
+		// editable.focus()
 	})
 })

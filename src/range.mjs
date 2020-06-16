@@ -167,10 +167,7 @@ const surround = function(elementDOM) {
 
 	range.selectNodeContents(elementDOM)
 
-	// if (range.collapsed) {
-	// 	range.setStartAfter(textNode)
-	// 	range.setEndAfter(textNode)
-	// }
+	focusEditableElement()
 }
 
 // secimi verilen dom ile kaplar.
@@ -301,31 +298,6 @@ const nextSlice = (
 	}
 }
 
-const abc = (range, until, newEl, childEl)=> {
-	if (isTextNode(range.startContainer)) {
-		const { startContainer, startOffset, endContainer, endOffset } = range
-		let text
-		if (startContainer === endContainer) {
-			text = startContainer.textContent.slice(startOffset, endOffset)
-			startContainer.textContent = startContainer.textContent.slice(0, startOffset) 
-				+ startContainer.textContent.slice(endOffset)
-			range.setStart(startContainer, startOffset)
-		} else {
-			text = startContainer.textContent.slice(startOffset)
-			startContainer.textContent = startContainer.textContent.slice(0, startOffset)
-			range.setStart(startContainer, startOffset)
-		}
-
-		const textNode = document.createTextNode(text)
-
-		const el = range.startContainer.parentElement.cloneNode()
-		el.append(textNode)
-		return el
-	} else {
-		range.startContainer.childNodes
-	}
-}
-
 // <span class="note">Lorem ipsum <strong>→dolor sit←</strong> amet.</span>
 // => undo("STRONG")
 // => <span class="note">Lorem ipsum →dolor sit← amet.</span>
@@ -335,6 +307,7 @@ const undo = until => {
 
 	if (range.collapsed) {
 		splitBetweenWith(until)
+		focusEditableElement()
 		return
 	}
 
@@ -374,23 +347,7 @@ const undo = until => {
 		range.setEndBefore(nextDOM)
 	}
 
-
-	// let beforeNode
-	
-	// let [beforeNode,] = splitText()
-	
-	// if (isTextNode(range.startContainer)) {
-	// 	beforeNode = splitText()[0]
-	// } else {
-	// 	beforeNode = range
-	// 		.startContainer
-	// 		.childNodes[range.startOffset]
-	// 		.previousSibling
-	// }
-	// const [existDOM,,nextDOM] = nextSlice(beforeNode, until)
-	// existDOM.after(nextDOM)
-
-	// range.insertNode(selection)
+	focusEditableElement()
 }
 
 // DOM ile 2. parametredeki kuralin eslesip eslesmedigini kontrol eder.
@@ -417,6 +374,18 @@ const splitBetweenWith = tagName => {
 		textNode = textNode.firstChild
 	}
 	range.selectNode(textNode)
+}
+
+const focusEditableElement = () => {
+	const range = getRange()
+	if (!range) return
+	let editableEl = range.commonAncestorContainer
+
+	while (editableEl.parentElement.isContentEditable) {
+		editableEl = editableEl.parentElement
+	}
+
+	editableEl.focus()
 }
 
 export {

@@ -265,10 +265,7 @@
 
 		range.selectNodeContents(elementDOM);
 
-		// if (range.collapsed) {
-		// 	range.setStartAfter(textNode)
-		// 	range.setEndAfter(textNode)
-		// }
+		focusEditableElement();
 	};
 
 	// secimi verilen dom ile kaplar.
@@ -433,6 +430,7 @@
 
 		if (range.collapsed) {
 			splitBetweenWith(until);
+			focusEditableElement();
 			return
 		}
 
@@ -472,6 +470,7 @@
 			range.setEndBefore(nextDOM);
 		}
 
+		focusEditableElement();
 
 		// let beforeNode
 		
@@ -515,6 +514,18 @@
 			textNode = textNode.firstChild;
 		}
 		range.selectNode(textNode);
+	};
+
+	const focusEditableElement = () => {
+		const range = getRange();
+		if (!range) return
+		let editableEl = range.commonAncestorContainer;
+
+		while (editableEl.parentElement.isContentEditable) {
+			editableEl = editableEl.parentElement;
+		}
+
+		editableEl.focus();
 	};
 
 	var Range = /*#__PURE__*/Object.freeze({
