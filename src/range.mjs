@@ -402,5 +402,4 @@ export {
 	splitBetweenWith,
 	splitText,
 	undo,
-	abc
 }
