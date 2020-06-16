@@ -1,21 +1,20 @@
 ### yaz
 
-is a execCommand implementation for modern html elements like strong and to fixes awkward things on editable body.
+is a **execCommand** implementation for modern html elements like strong and to fixes awkward things on editable body.
 
 It's simply and mini.
 
 ### Installation
 
-to install:
+to install node package:
 
 ```
 npm install yaz
 ```
 
-or
-
-```
-yarn add yaz
+or use direct on web browser:
+```html
+<script src="http://unpkg.com/yaz"></script>
 ```
 
 ### Usage
