@@ -36,8 +36,14 @@ function escapeHtml(str) {
   	return str.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, "\"").replace(/'/g, "'");
 }
 
-document.addEventListener('selectionchange', () => {
+function writeSourceCode () {
 	window['output'].innerText = window['editable'].outerHTML
+}
+
+writeSourceCode()
+
+document.addEventListener('selectionchange', () => {
+	writeSourceCode()
 
 	document.querySelectorAll('.btn').forEach(button => {
 		let isActive = false;

@@ -1,11 +1,7 @@
 body {
 	font-family: helvetica, arial, sans-serif;
-	margin: 2em;
-}
-  
-h1 {
-	font-style: italic;
-	color: #373fff;
+	margin: 2em auto;
+	max-width: 50em;
 }
 
 .note {
@@ -14,4 +10,7 @@ h1 {
 
 button.active {
 	background-color: aqua;
+	border-color: #0bb;
+	border-width: 2px;
+	border-style: outset;
 }
