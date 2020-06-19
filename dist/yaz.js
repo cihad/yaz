@@ -46,6 +46,13 @@
 		return dom
 	};
 
+	const unwrap = node => {
+		while (node.hasChildNodes()) {
+			node.parentNode.insertBefore(node.firstChild, node);
+		}
+		node.remove();
+	};
+
 	const copyPasteChildNodes = (pasteDOM, copyDOM) => {
 		while (copyDOM.childNodes.length > 0) {
 			pasteDOM.appendChild(copyDOM.childNodes[0]);
@@ -113,6 +120,7 @@
 		copyPasteChildNodes: copyPasteChildNodes,
 		wrapInWith: wrapInWith,
 		wrapOutWith: wrapOutWith,
+		unwrap: unwrap,
 		isSelfClosing: isSelfClosing
 	});
 
@@ -486,6 +494,25 @@
 		editableEl.focus();
 	};
 
+	const unwrapWith = tagName => {
+		const range = getRange();
+		if (!range) return
+
+		let element = range.commonAncestorContainer;
+
+		while (element.tagName !== tagName) {
+			if (!element.isContentEditable && !isTextNode(element)) {
+				element = null;
+				break
+			}
+
+			element = element.parentElement;
+		}
+
+		if (!element) return
+		unwrap(element);
+	};
+
 	var Range = /*#__PURE__*/Object.freeze({
 		getRange: getRange,
 		isWrappedWith: isWrappedWith,
@@ -499,7 +526,8 @@
 		nextSlice: nextSlice,
 		splitBetweenWith: splitBetweenWith,
 		splitText: splitText,
-		undo: undo
+		undo: undo,
+		unwrapWith: unwrapWith
 	});
 
 	var index = {

@@ -30,7 +30,7 @@ const UNBOLD = () => yaz.Range.undo("STRONG")
 const UNITALIC = () => yaz.Range.undo("EM")
 const UNU = () => yaz.Range.undo("U")
 const UNNOTE = () => yaz.Range.undo({ className: "note", tagName: "SPAN" })
-const UNLINK = () => yaz.Range.undo("A")
+const UNLINK = () => yaz.Range.unwrapWith("A")
 
 function escapeHtml(str) {
   	return str.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, "\"").replace(/'/g, "'");

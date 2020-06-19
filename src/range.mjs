@@ -8,6 +8,7 @@ import {
 	isElementNode,
 	isTextNode,
 	isEmpty,
+	unwrap
 } from "./node.mjs"
 
 // →selection←
@@ -388,6 +389,25 @@ const focusEditableElement = () => {
 	editableEl.focus()
 }
 
+const unwrapWith = tagName => {
+	const range = getRange()
+	if (!range) return
+
+	let element = range.commonAncestorContainer
+
+	while (element.tagName !== tagName) {
+		if (!element.isContentEditable && !isTextNode(element)) {
+			element = null
+			break
+		}
+
+		element = element.parentElement
+	}
+
+	if (!element) return
+	unwrap(element)
+}
+
 export {
 	getRange,
 	isWrappedWith,
@@ -402,4 +422,5 @@ export {
 	splitBetweenWith,
 	splitText,
 	undo,
+	unwrapWith,
 }

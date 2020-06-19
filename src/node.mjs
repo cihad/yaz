@@ -40,6 +40,13 @@ const wrapInWith = (dom, wrapperDOM) => {
 	return dom
 }
 
+const unwrap = node => {
+	while (node.hasChildNodes()) {
+		node.parentNode.insertBefore(node.firstChild, node)
+	}
+	node.remove()
+}
+
 const copyPasteChildNodes = (pasteDOM, copyDOM) => {
 	while (copyDOM.childNodes.length > 0) {
 		pasteDOM.appendChild(copyDOM.childNodes[0]);
@@ -107,5 +114,6 @@ export {
 	copyPasteChildNodes,
 	wrapInWith,
 	wrapOutWith,
+	unwrap,
 	isSelfClosing,
 }
